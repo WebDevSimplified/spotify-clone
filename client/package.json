@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.3",
@@ -14,6 +16,7 @@
     "react-scripts": "4.0.3",
     "react-spotify-web-playback": "^0.8.1",
     "spotify-web-api-node": "^5.0.2",
+    "styled-components": "^5.2.3",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
