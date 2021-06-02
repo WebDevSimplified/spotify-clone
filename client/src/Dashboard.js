@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import useAuth from "./useAuth"
 import Player from "./Player"
+import LightModeIcon from "@material-ui/icons/Brightness5"
+import DarkModeIcon from "@material-ui/icons/Brightness4"
 import TrackSearchResult from "./TrackSearchResult"
 import { Container, Form } from "react-bootstrap"
 import SpotifyWebApi from "spotify-web-api-node"
@@ -10,7 +12,7 @@ const spotifyApi = new SpotifyWebApi({
   clientId: "8b945ef10ea24755b83ac50cede405a0",
 })
 
-export default function Dashboard({ code }) {
+export default function Dashboard({ code, toggleTheme, theme }) {
   const accessToken = useAuth(code)
   const [search, setSearch] = useState("")
   const [searchResults, setSearchResults] = useState([])
@@ -75,6 +77,13 @@ export default function Dashboard({ code }) {
 
   return (
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
+      <button
+        className="btn"
+        style={{ marginLeft: "auto", marginBottom: "2rem", background: theme.btnBackground }}
+        onClick={toggleTheme}
+      >
+        {theme.name === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+      </button>
       <Form.Control
         type="search"
         placeholder="Search Songs/Artists"
@@ -96,7 +105,11 @@ export default function Dashboard({ code }) {
         )}
       </div>
       <div>
-        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+        <Player
+          accessToken={accessToken}
+          trackUri={playingTrack?.uri}
+          theme={theme}
+        />
       </div>
     </Container>
   )
