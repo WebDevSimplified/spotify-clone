@@ -75,12 +75,16 @@ export default function Dashboard({ code }) {
 
   return (
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
+      <h1> Happy Birthday Alice!</h1>
       <Form.Control
         type="search"
         placeholder="Search Songs/Artists"
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
+            <a className="btn btn-success btn-lg">
+        Avishek
+      </a>
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
         {searchResults.map(track => (
           <TrackSearchResult
