@@ -85,6 +85,18 @@ export default function Dashboard({ code }) {
             <a className="btn btn-success btn-lg">
         Avishek
       </a>
+      <a className="btn btn-success btn-lg">
+        Jeremy
+      </a>
+      <a className="btn btn-success btn-lg">
+        Dima
+      </a>
+      <a className="btn btn-success btn-lg">
+        Liz Krogman
+      </a>
+      <a className="btn btn-success btn-lg">
+        Grace
+      </a>
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
         {searchResults.map(track => (
           <TrackSearchResult
