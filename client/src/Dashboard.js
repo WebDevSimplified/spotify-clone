@@ -7,7 +7,7 @@ import SpotifyWebApi from "spotify-web-api-node"
 import axios from "axios"
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: "8b945ef10ea24755b83ac50cede405a0",
+  clientId: "87c1e24dd0da4bfead62c866084f725e",
 })
 
 export default function Dashboard({ code }) {
@@ -75,12 +75,28 @@ export default function Dashboard({ code }) {
 
   return (
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
+      <h1> Happy Birthday Alice!</h1>
       <Form.Control
         type="search"
         placeholder="Search Songs/Artists"
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
+            <a className="btn btn-success btn-lg">
+        Avishek
+      </a>
+      <a className="btn btn-success btn-lg">
+        Jeremy
+      </a>
+      <a className="btn btn-success btn-lg">
+        Dima
+      </a>
+      <a className="btn btn-success btn-lg">
+        Liz Krogman
+      </a>
+      <a className="btn btn-success btn-lg">
+        Grace
+      </a>
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
         {searchResults.map(track => (
           <TrackSearchResult
