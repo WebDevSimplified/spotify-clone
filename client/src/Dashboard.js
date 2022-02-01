@@ -23,6 +23,29 @@ export default function Dashboard({ code }) {
     setLyrics("")
   }
 
+  function People() {
+    const [active, setActive] = useState(types[0]);
+    return (
+      <>
+        <div>
+          {types.map((type) => (
+            <button
+              key={type}
+              active={active === type}
+              onClick={() => setActive(type)}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
+        <p />
+        <p> Current Selection:  {active} </p>
+      </>
+    );
+  }
+  // const types = ["Cash", "Credit", "Debit"]
+  const types = ["Avishek Khan", "Jeremy Morgan", "Andrew Oliver", "Grace Carlson", "Andrea Chalem", "Liz Krogman","Milla Shin", "Dima Fayyad", "Sammy Archer"];
+  
   useEffect(() => {
     if (!playingTrack) return
 
@@ -82,21 +105,39 @@ export default function Dashboard({ code }) {
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
-            <a className="btn btn-success btn-lg">
-        Avishek
-      </a>
-      <a className="btn btn-success btn-lg">
-        Jeremy
-      </a>
-      <a className="btn btn-success btn-lg">
-        Dima
-      </a>
-      <a className="btn btn-success btn-lg">
+      <People> </People>
+      
+        {/* <button className="btn btn-success btn-lg" onChange={selectUser}>
+        Avishek Khan
+      </button>
+      <button className="btn btn-success btn-lg">
+        Jeremy Morgan
+      </button>
+      <button className="btn btn-success btn-lg">
+        MacKenzi Simpson
+      </button>
+            <button className="btn btn-success btn-lg">
+        Sammy Archer
+      </button>
+      <button className="btn btn-success btn-lg">
+        Andrew Oliver
+      </button>
+      <button className="btn btn-success btn-lg">
+        Dima Fayyad
+      </button>
+      <button className="btn btn-success btn-lg">
         Liz Krogman
-      </a>
-      <a className="btn btn-success btn-lg">
-        Grace
-      </a>
+      </button>
+      <button className="btn btn-success btn-lg">
+        Grace Carlson
+      </button>
+      <button className="btn btn-success btn-lg">
+        Andrea Chalem
+      </button>
+      <button className="btn btn-success btn-lg">
+        Milla Shin
+      </button> */}
+
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
         {searchResults.map(track => (
           <TrackSearchResult
