@@ -17,6 +17,7 @@ export default function Dashboard({ code }) {
   const [playingTrack, setPlayingTrack] = useState()
   const [lyrics, setLyrics] = useState("")
 
+
   function chooseTrack(track) {
     setPlayingTrack(track)
     setSearch("")
@@ -24,27 +25,34 @@ export default function Dashboard({ code }) {
   }
 
   function People() {
-    const [active, setActive] = useState(types[0]);
+    const [activePerson, setActive] = useState(person[0]);
+    if (activePerson === "Avishek Khan"){
+      chooseTrack('spotify:track:6Hx7kdHB9kGdxnw2EwSx2V');
+
+      // console.log("Reached If statement!!!")
+    }
     return (
       <>
         <div>
-          {types.map((type) => (
+          {person.map((person) => (
             <button
-              key={type}
-              active={active === type}
-              onClick={() => setActive(type)}
+              key={person}
+              active={activePerson === person}
+              onClick={() => setActive(person)}
             >
-              {type}
+              {person}
             </button>
           ))}
         </div>
         <p />
-        <p> Current Selection:  {active} </p>
+        <p> Current Selection:  {activePerson} </p>
       </>
+
     );
+   
+
   }
-  // const types = ["Cash", "Credit", "Debit"]
-  const types = ["Avishek Khan", "Jeremy Morgan", "Andrew Oliver", "Grace Carlson", "Andrea Chalem", "Liz Krogman","Milla Shin", "Dima Fayyad", "Sammy Archer"];
+  const person = ["Avishek Khan", "Jeremy Morgan", "Andrew Oliver", "Grace Carlson", "Andrea Chalem", "Liz Krogman","Milla Shin", "Dima Fayyad", "Sammy Archer"];
   
   useEffect(() => {
     if (!playingTrack) return
@@ -105,38 +113,9 @@ export default function Dashboard({ code }) {
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
-      <People> </People>
-      
-        {/* <button className="btn btn-success btn-lg" onChange={selectUser}>
-        Avishek Khan
-      </button>
-      <button className="btn btn-success btn-lg">
-        Jeremy Morgan
-      </button>
-      <button className="btn btn-success btn-lg">
-        MacKenzi Simpson
-      </button>
-            <button className="btn btn-success btn-lg">
-        Sammy Archer
-      </button>
-      <button className="btn btn-success btn-lg">
-        Andrew Oliver
-      </button>
-      <button className="btn btn-success btn-lg">
-        Dima Fayyad
-      </button>
-      <button className="btn btn-success btn-lg">
-        Liz Krogman
-      </button>
-      <button className="btn btn-success btn-lg">
-        Grace Carlson
-      </button>
-      <button className="btn btn-success btn-lg">
-        Andrea Chalem
-      </button>
-      <button className="btn btn-success btn-lg">
-        Milla Shin
-      </button> */}
+      <People> 
+      {/* This prints the people as buttons */}
+      </People> 
 
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
         {searchResults.map(track => (
