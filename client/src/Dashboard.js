@@ -16,43 +16,59 @@ export default function Dashboard({ code }) {
   const [searchResults, setSearchResults] = useState([])
   const [playingTrack, setPlayingTrack] = useState()
   const [lyrics, setLyrics] = useState("")
+  const [mainCharacter, setMainCharacter] = useState("")
 
 
   function chooseTrack(track) {
+    console.log(track);
     setPlayingTrack(track)
     setSearch("")
     setLyrics("")
   }
 
-  function People() {
-    const [activePerson, setActive] = useState(person[0]);
-    if (activePerson === "Avishek Khan"){
-      chooseTrack('spotify:track:6Hx7kdHB9kGdxnw2EwSx2V');
+  function pleaseWork(person, track){
+    console.log("this should appear");
+    console.log(person);
+    setMainCharacter(person);
+    chooseTrack(track);
+    chooseTrack({artist: 'Two Friends', title: 'Looking At You (feat. Sam Vesso)', uri: 'spotify:track:2IBzArIJ2ognJz1EZinuPg', albumUrl: 'https://i.scdn.co/image/ab67616d00004851d11eb534eecdcabffd036a01'});
+    return 
+  }
+  useEffect(() => {
+    if (!accessToken) return
+    console.log("Main character is: ", mainCharacter);
 
-      // console.log("Reached If statement!!!")
-    }
+  }, [mainCharacter]);
+
+  function People() {
+    const TwoFriendsSong = {artist: 'Two Friends', title: 'Looking At You (feat. Sam Vesso)', uri: 'spotify:track:2IBzArIJ2ognJz1EZinuPg', albumUrl: 'https://i.scdn.co/image/ab67616d00004851d11eb534eecdcabffd036a01'};
+    const person = ["Avishek Khan", "Jeremy Morgan", "Andrew Oliver", "Grace Carlson", "Andrea Chalem", "Liz Krogman","Milla Shin", "Dima Fayyad", "Sammy Archer"];
+    
+    const testPerson = {"name":"Avishek Khan", "track_info": TwoFriendsSong};
+
+
     return (
       <>
         <div>
           {person.map((person) => (
             <button
               key={person}
-              active={activePerson === person}
-              onClick={() => setActive(person)}
+              active={mainCharacter === person}
+              onClick={() => pleaseWork(person,testPerson.track_info)}
             >
               {person}
             </button>
           ))}
         </div>
         <p />
-        <p> Current Selection:  {activePerson} </p>
+        <p> Current Selection:  {mainCharacter} </p>
       </>
 
     );
    
 
   }
-  const person = ["Avishek Khan", "Jeremy Morgan", "Andrew Oliver", "Grace Carlson", "Andrea Chalem", "Liz Krogman","Milla Shin", "Dima Fayyad", "Sammy Archer"];
+  
   
   useEffect(() => {
     if (!playingTrack) return
@@ -73,6 +89,8 @@ export default function Dashboard({ code }) {
     if (!accessToken) return
     spotifyApi.setAccessToken(accessToken)
   }, [accessToken])
+
+
 
   useEffect(() => {
     if (!search) return setSearchResults([])
@@ -105,6 +123,10 @@ export default function Dashboard({ code }) {
   }, [search, accessToken])
 
   return (
+    <>
+        <People> 
+    {/* This prints the people as buttons */}
+    </People> 
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
       <h1> Happy Birthday Alice!</h1>
       <Form.Control
@@ -113,10 +135,6 @@ export default function Dashboard({ code }) {
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
-      <People> 
-      {/* This prints the people as buttons */}
-      </People> 
-
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
         {searchResults.map(track => (
           <TrackSearchResult
@@ -132,8 +150,10 @@ export default function Dashboard({ code }) {
         )}
       </div>
       <div>
-        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+        <Player accessToken={accessToken} trackUri={playingTrack?.uri } />
       </div>
     </Container>
+    </>
   )
+
 }
