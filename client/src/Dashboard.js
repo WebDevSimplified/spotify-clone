@@ -26,12 +26,23 @@ export default function Dashboard({ code }) {
     setLyrics("")
   }
 
-  function pleaseWork(person, track){
-    console.log("this should appear");
-    console.log(person);
+  function selectSongByPerson(person){
+    const Avishek_Khan_Song = {artist: 'Two Friends', title: 'Useless', uri: 'spotify:track:3j5ZswTjrNasJnAQOQ1qNU', albumUrl: 'https://i.scdn.co/image/ab67616d0000485116ae2dac30de0d7c925dd179'};
+    const Jeremy_Morgan_Song = {artist: 'Just A Gent', title: 'LSD', uri: 'spotify:track:1AiBJB2v6Lp6BiqARZh3R5', albumUrl: 'https://i.scdn.co/image/ab67616d0000485179a24632f09707fac6e89a95'};
+    
+    const Mr_Brightside = {artist: 'The Killers', title: 'Mr. Brightside', uri: 'spotify:track:7oK9VyNzrYvRFo7nQEYkWN', albumUrl: 'https://i.scdn.co/image/ab67616d0000485156a6d6e493a8f338be63fc49'};
+    
     setMainCharacter(person);
-    chooseTrack(track);
-    chooseTrack({artist: 'Two Friends', title: 'Looking At You (feat. Sam Vesso)', uri: 'spotify:track:2IBzArIJ2ognJz1EZinuPg', albumUrl: 'https://i.scdn.co/image/ab67616d00004851d11eb534eecdcabffd036a01'});
+    if (person === "Avishek Khan"){
+      chooseTrack(Avishek_Khan_Song);
+      return
+    }
+    if (person === "Jeremy Morgan"){
+      chooseTrack(Jeremy_Morgan_Song);
+      return
+    }
+    
+    chooseTrack(Mr_Brightside);
     return 
   }
   useEffect(() => {
@@ -42,11 +53,9 @@ export default function Dashboard({ code }) {
 
   function People() {
     const TwoFriendsSong = {artist: 'Two Friends', title: 'Looking At You (feat. Sam Vesso)', uri: 'spotify:track:2IBzArIJ2ognJz1EZinuPg', albumUrl: 'https://i.scdn.co/image/ab67616d00004851d11eb534eecdcabffd036a01'};
+  
     const person = ["Avishek Khan", "Jeremy Morgan", "Andrew Oliver", "Grace Carlson", "Andrea Chalem", "Liz Krogman","Milla Shin", "Dima Fayyad", "Sammy Archer"];
     
-    const testPerson = {"name":"Avishek Khan", "track_info": TwoFriendsSong};
-
-
     return (
       <>
         <div>
@@ -54,7 +63,7 @@ export default function Dashboard({ code }) {
             <button
               key={person}
               active={mainCharacter === person}
-              onClick={() => pleaseWork(person,testPerson.track_info)}
+              onClick={() => selectSongByPerson(person)}
             >
               {person}
             </button>
