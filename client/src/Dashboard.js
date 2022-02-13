@@ -7,7 +7,7 @@ import SpotifyWebApi from "spotify-web-api-node"
 import axios from "axios"
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: "8b945ef10ea24755b83ac50cede405a0",
+  clientId: "87c1e24dd0da4bfead62c866084f725e",
 })
 
 export default function Dashboard({ code }) {
@@ -16,13 +16,69 @@ export default function Dashboard({ code }) {
   const [searchResults, setSearchResults] = useState([])
   const [playingTrack, setPlayingTrack] = useState()
   const [lyrics, setLyrics] = useState("")
+  const [mainCharacter, setMainCharacter] = useState("")
+
 
   function chooseTrack(track) {
+    console.log(track);
     setPlayingTrack(track)
     setSearch("")
     setLyrics("")
   }
 
+  function selectSongByPerson(person){
+    const Avishek_Khan_Song = {artist: 'Two Friends', title: 'Useless', uri: 'spotify:track:3j5ZswTjrNasJnAQOQ1qNU', albumUrl: 'https://i.scdn.co/image/ab67616d0000485116ae2dac30de0d7c925dd179'};
+    const Jeremy_Morgan_Song = {artist: 'Just A Gent', title: 'LSD', uri: 'spotify:track:1AiBJB2v6Lp6BiqARZh3R5', albumUrl: 'https://i.scdn.co/image/ab67616d0000485179a24632f09707fac6e89a95'};
+    
+    const Mr_Brightside = {artist: 'The Killers', title: 'Mr. Brightside', uri: 'spotify:track:7oK9VyNzrYvRFo7nQEYkWN', albumUrl: 'https://i.scdn.co/image/ab67616d0000485156a6d6e493a8f338be63fc49'};
+    
+    setMainCharacter(person);
+    if (person === "Avishek Khan"){
+      chooseTrack(Avishek_Khan_Song);
+      return
+    }
+    if (person === "Jeremy Morgan"){
+      chooseTrack(Jeremy_Morgan_Song);
+      return
+    }
+    
+    chooseTrack(Mr_Brightside);
+    return 
+  }
+  useEffect(() => {
+    if (!accessToken) return
+    console.log("Main character is: ", mainCharacter);
+
+  }, [mainCharacter]);
+
+  function People() {
+    const TwoFriendsSong = {artist: 'Two Friends', title: 'Looking At You (feat. Sam Vesso)', uri: 'spotify:track:2IBzArIJ2ognJz1EZinuPg', albumUrl: 'https://i.scdn.co/image/ab67616d00004851d11eb534eecdcabffd036a01'};
+  
+    const person = ["Avishek Khan", "Jeremy Morgan", "Andrew Oliver", "Grace Carlson", "Andrea Chalem", "Liz Krogman","Milla Shin", "Dima Fayyad", "Sammy Archer"];
+    
+    return (
+      <>
+        <div>
+          {person.map((person) => (
+            <button
+              key={person}
+              active={mainCharacter === person}
+              onClick={() => selectSongByPerson(person)}
+            >
+              {person}
+            </button>
+          ))}
+        </div>
+        <p />
+        <p> Current Selection:  {mainCharacter} </p>
+      </>
+
+    );
+   
+
+  }
+  
+  
   useEffect(() => {
     if (!playingTrack) return
 
@@ -42,6 +98,8 @@ export default function Dashboard({ code }) {
     if (!accessToken) return
     spotifyApi.setAccessToken(accessToken)
   }, [accessToken])
+
+
 
   useEffect(() => {
     if (!search) return setSearchResults([])
@@ -74,7 +132,12 @@ export default function Dashboard({ code }) {
   }, [search, accessToken])
 
   return (
+    <>
+        <People> 
+    {/* This prints the people as buttons */}
+    </People> 
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
+      <h1> Happy Birthday Alice!</h1>
       <Form.Control
         type="search"
         placeholder="Search Songs/Artists"
@@ -96,8 +159,10 @@ export default function Dashboard({ code }) {
         )}
       </div>
       <div>
-        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+        <Player accessToken={accessToken} trackUri={playingTrack?.uri } />
       </div>
     </Container>
+    </>
   )
+
 }
