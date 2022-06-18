@@ -23,8 +23,8 @@ app.post("/refresh", (req, res) => {
     .refreshAccessToken()
     .then(data => {
       res.json({
-        accessToken: data.body.accessToken,
-        expiresIn: data.body.expiresIn,
+        accessToken: data.body.access_token,
+        expiresIn: data.body.expires_in,
       })
     })
     .catch(err => {
@@ -34,6 +34,7 @@ app.post("/refresh", (req, res) => {
 })
 
 app.post("/login", (req, res) => {
+  
   const code = req.body.code
   const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
@@ -44,6 +45,7 @@ app.post("/login", (req, res) => {
   spotifyApi
     .authorizationCodeGrant(code)
     .then(data => {
+      console.log(data)
       res.json({
         accessToken: data.body.access_token,
         refreshToken: data.body.refresh_token,
@@ -51,7 +53,8 @@ app.post("/login", (req, res) => {
       })
     })
     .catch(err => {
-      res.sendStatus(400)
+      console.error(err)
+      // res.sendStatus(400)
     })
 })
 

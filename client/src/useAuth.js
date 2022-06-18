@@ -7,18 +7,18 @@ export default function useAuth(code) {
   const [expiresIn, setExpiresIn] = useState()
 
   useEffect(() => {
+    console.log(code)
     axios
-      .post("http://localhost:3001/login", {
-        code,
-      })
+      .post("http://localhost:3001/login", {code})
       .then(res => {
         setAccessToken(res.data.accessToken)
         setRefreshToken(res.data.refreshToken)
         setExpiresIn(res.data.expiresIn)
         window.history.pushState({}, null, "/")
       })
-      .catch(() => {
+      .catch((err) => {
         window.location = "/"
+        console.error(err)
       })
   }, [code])
 
