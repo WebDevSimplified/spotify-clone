@@ -1,11 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import LoginPremium from "./LoginPremium";
 import Dashboard from "./Dashboard";
 import { useContext, useEffect, useState } from "react";
-//import useAuth from "../context/useAuth";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 function Premium() {
   //? Context
@@ -17,8 +15,6 @@ function Premium() {
   );
   const [refreshToken, setRefreshToken] = useState(null);
   const [expiresIn, setExpiresIn] = useState(null);
-
-  //const check = useAuth(code);
 
   useEffect(() => {
     const setLogin = (value) => {
@@ -79,7 +75,9 @@ function Premium() {
 
   if (accessToken) return <Dashboard accessToken={accessToken} />;
 
-  return <LoginPremium />;
+  return (<div>
+      'Premium dashboard'
+  </div>)
 }
 
 export default Premium;
