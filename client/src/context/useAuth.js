@@ -2,12 +2,11 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 export default function useAuth(code) {
-  const [accessToken, setAccessToken] = useState()
-  const [refreshToken, setRefreshToken] = useState()
-  const [expiresIn, setExpiresIn] = useState()
+  const [accessToken, setAccessToken] = useState(null)
+  const [refreshToken, setRefreshToken] = useState(null)
+  const [expiresIn, setExpiresIn] = useState(null)
 
   useEffect(() => {
-    console.log(code)
     axios
       .post("http://localhost:3001/login", {code})
       .then(res => {
@@ -17,13 +16,14 @@ export default function useAuth(code) {
         window.history.pushState({}, null, "/")
       })
       .catch((err) => {
-        window.location = "/"
+        // window.location = "/"
         console.error(err)
       })
   }, [code])
 
   useEffect(() => {
     if (!refreshToken || !expiresIn) return
+
     const interval = setInterval(() => {
       axios
         .post("http://localhost:3001/refresh", {
@@ -32,6 +32,7 @@ export default function useAuth(code) {
         .then(res => {
           setAccessToken(res.data.accessToken)
           setExpiresIn(res.data.expiresIn)
+          localStorage.setItem('accessToken', res.data.accessToken)
         })
         .catch(() => {
           window.location = "/"

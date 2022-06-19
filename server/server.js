@@ -54,7 +54,7 @@ app.post("/login", (req, res) => {
     })
     .catch(err => {
       console.error(err)
-      // res.sendStatus(400)
+      res.sendStatus(400)
     })
 })
 
