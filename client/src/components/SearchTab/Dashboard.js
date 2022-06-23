@@ -2,12 +2,8 @@ import { useState, useEffect } from "react";
 import Player from "./Player";
 import TrackSearchResult from "./TrackSearchResult";
 import { Container, Form } from "react-bootstrap";
-import SpotifyWebApi from "spotify-web-api-node";
 import axios from "axios";
-
-const spotifyApi = new SpotifyWebApi({
-  clientId: "2adb8aafcdf54b30a8caee191d58ff23",
-});
+import { spotifyApi } from "../../spotify/spotifyApi";
 
 export default function Dashboard({ accessToken }) {
   window.history.pushState({}, null, "/")

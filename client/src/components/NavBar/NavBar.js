@@ -11,13 +11,23 @@ function NavBar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/premium" className="nav-link">
-            Premium
+          <NavLink to="/library" className="nav-link">
+            Library
           </NavLink>
         </li>
         <li>
           <NavLink to="/recommended" className="nav-link">
             Recommended
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/search" className="nav-link">
+            Search
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/user" className="nav-link">
+            User
           </NavLink>
         </li>
       </ul>

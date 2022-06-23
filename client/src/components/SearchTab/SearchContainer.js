@@ -5,7 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { AuthContext } from "../../context/AuthContext";
 
-function Premium() {
+function SearchContainer() {
   //? Context
   const { setAuth } = useContext(AuthContext);
 
@@ -80,4 +80,4 @@ function Premium() {
   </div>)
 }
 
-export default Premium;
+export default SearchContainer;
